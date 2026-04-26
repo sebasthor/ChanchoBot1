@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>ChanchoBot</title>
+</head>
+<body>
+  <h1>ChanchoBot</h1>
+
+  <input id="msg" placeholder="Escribí algo..." />
+  <button onclick="send()">Enviar</button>
+
+  <div id="chat"></div>
+
+  <script>
+    async function send() {
+      const msg = document.getElementById("msg");
+      const text = msg.value;
+      msg.value = "";
+
+      document.getElementById("chat").innerHTML += `<p><b>Vos:</b> ${text}</p>`;
+
+      const res = await fetch("/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: text, userId: "public" })
+      });
+
+      const data = await res.json();
+      document.getElementById("chat").innerHTML += `<p><b>Chancho:</b> ${data.reply}</p>`;
+    }
+  </script>
+</body>
+</html>
