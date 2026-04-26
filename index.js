@@ -127,3 +127,7 @@ app.post("/reset", (req, res) => {
 app.listen(port, () => {
   console.log(`ChanchoBot público funcionando en http://localhost:${port}`);
 });
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
