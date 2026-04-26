@@ -7,6 +7,9 @@ try {
   require("dotenv").config();
 } catch (_) {}
 
+console.log("KEY:", process.env.OPENAI_API_KEY ? process.env.OPENAI_API_KEY.slice(0, 12) : "NO EXISTE");
+console.log("MODEL:", process.env.OPENAI_MODEL);
+
 const { searchMemories } = require("./memory");
 
 const app = express();
